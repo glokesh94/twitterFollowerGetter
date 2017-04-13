@@ -1,0 +1,13 @@
+import tweepy
+
+
+auth = tweepy.OAuthHandler("6ElhgWsdL2M83rpxFChDJYVHA", "eIXeNv7oB8I85xp1Cft5BoYQ57ncjN8DqJkKGpHve26XQXY0T8")
+auth.set_access_token("3685943952-iAkzGd6c6RKdiqAkFZgNy4NqkDs9whRaCvXsj45", "4Pg7NyCgvZfh0xiRe31kkXuwya2RnO24YiepR0wygA3Fu")
+api = tweepy.API(auth, wait_on_rate_limit=True)
+
+i = 0
+for page in tweepy.Cursor(api.friends, screen_name="alexpimania", count=100).pages():
+    for user in page:
+        i+=1
+        if i <= 50:
+            api.destroy_friendship(user.id)
