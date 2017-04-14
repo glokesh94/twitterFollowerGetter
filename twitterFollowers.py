@@ -82,9 +82,11 @@ def unfollowUsers(userIdsToUnfollow):
         api.destroy_friendship(userId)
         
     followed = json.loads(open("userIds.txt").read())
+    i = 0
     for user in followed:
         if user["userId"] in userIdsToUnfollow:
-            del followed[followed.index(user["userId"])]
+            del followed[i]
+        i += 1
     with open("userIds.txt", "w") as userIdFile:
         userIdFile.write(json.dumps(followed))
         
